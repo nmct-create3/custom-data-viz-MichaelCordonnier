@@ -87,15 +87,15 @@ const renderStaticHtml = (data) => {
 const renderRdBtns = (data) => {
   for (let party in data) {
     // render a radio button and a label for each party
-    $controlsEl.innerHTML += '<div class="button-control"><input type="radio" name="party" id="' + party + '" value="' + party + '" class="sr-only"><label for="' + party + '">' + party + "</label></div>";
+    $controlsEl.innerHTML += '<div class="button-control"><input type="radio" name="party" id="' + party + '" value="' + party + '" class="sr-only js-rdbtn"><label for="' + party + '">' + party + "</label></div>";
   }
 };
 
 const renderLegends = (data) => {
   let html = "";
   for (let party in data) {
-    html += '<ul class="legend ' + party + '">';
-    let counter = 0;
+    html += '<ul class="legend" data-party="' + party + '">';
+    let counter = 1;
     for (let ageGroup in data[party].ages) {
       html += '<li style="--legendColor: var(--color-' + counter + ')" class="legend_item"><span class="legend__key">' + ageGroup + '</span><span class="legend__value">' + data[party].ages[ageGroup] + "</span></li>";
       counter++;
@@ -105,9 +105,35 @@ const renderLegends = (data) => {
   $legendEl.innerHTML = html;
 };
 
+const addEventListeners = () => {
+  rdbtnsEventlistener();
+};
+
+const rdbtnsEventlistener = () => {
+  const allRdBtns = document.querySelectorAll(".js-rdbtn");
+
+  allRdBtns.forEach((rdbtn) => {
+    rdbtn.addEventListener("change", (e) => {
+      const selectedParty = e.target.value;
+      togglePartyUl(selectedParty);
+    });
+  });
+};
+
+const togglePartyUl = (selectedParty) => {
+
+  const activeUl = document.querySelector(`.legend.active`);
+  if (activeUl) {
+    activeUl.classList.remove("active");
+  }
+  const rightUl = document.querySelector(`.legend[data-party="${selectedParty}"]`);
+
+  rightUl.classList.add("active");
+};
 const init = async () => {
   const data = await fetchLocalJSON();
   renderStaticHtml(data);
+  addEventListeners();
 };
 
 init();
