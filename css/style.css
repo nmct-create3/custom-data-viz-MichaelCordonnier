@@ -1,106 +1,105 @@
-@import"https://unpkg.com/open-props/easings.min.css";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
-
+@import "https://unpkg.com/open-props/easings.min.css";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap");
 
 :root {
-    --color-1: oklch(0.67 0.23 12.3 / 1);
-    --color-2: oklch(0.74 0.17 34.45);
-    --color-3: oklch(0.87 0.14 83.63);
-    --color-4: oklch(0.71 0.17 161.22);
-    --color-5: oklch(0.63 0.15 206.52);
-    --color-6: oklch(0.59 0.23 270.24);
+  --color-1: oklch(0.67 0.23 12.3 / 1);
+  --color-2: oklch(0.74 0.17 34.45);
+  --color-3: oklch(0.87 0.14 83.63);
+  --color-4: oklch(0.71 0.17 161.22);
+  --color-5: oklch(0.63 0.15 206.52);
+  --color-6: oklch(0.59 0.23 270.24);
 
-    --color-neutral-050: oklch(0.97 0.01 291.07);
-    --color-neutral-100: oklch(0.91 0.01 291.03);
-    --color-neutral-200: oklch(0.83 0.01 290.97);
-    --color-neutral-300: oklch(0.74 0.01 290.89);
-    --color-neutral-400: oklch(0.66 0.03 289.95);
-    --color-neutral-500: oklch(0.57 0.03 289.69);
-    --color-neutral-600: oklch(0.49 0.03 288.73);
-    --color-neutral-700: oklch(0.31 0.04 286);
-    --color-neutral-800: oklch(0.23 0.03 286.47);
-    --color-neutral-900: oklch(0.18 0.02 290.7);
+  --color-neutral-050: oklch(0.97 0.01 291.07);
+  --color-neutral-100: oklch(0.91 0.01 291.03);
+  --color-neutral-200: oklch(0.83 0.01 290.97);
+  --color-neutral-300: oklch(0.74 0.01 290.89);
+  --color-neutral-400: oklch(0.66 0.03 289.95);
+  --color-neutral-500: oklch(0.57 0.03 289.69);
+  --color-neutral-600: oklch(0.49 0.03 288.73);
+  --color-neutral-700: oklch(0.31 0.04 286);
+  --color-neutral-800: oklch(0.23 0.03 286.47);
+  --color-neutral-900: oklch(0.18 0.02 290.7);
 
-    --global-fontSize: 14;
+  --global-fontSize: 14;
 
+  --global-uiColor: var(--color-6);
 
---global-uiColor: var(--color-6) ;
+  --global-textColor: var(--color-neutral-800);
 
---global-textColor: var(--color-neutral-800) ;
+  --global-textColor-muted: var(--color-neutral-600);
 
---global-textColor-muted: var(--color-neutral-600) ;
+  --global-textColor-meta: var(--color-neutral-500);
 
---global-textColor-meta: var(--color-neutral-500) ;
+  --global-backgroundColor: var(--color-neutral-100);
 
---global-backgroundColor: var(--color-neutral-100) ;
-
---global-foregroundColor: white;
+  --global-foregroundColor: white;
 }
 
 @media (prefers-color-scheme: dark) {
-    :root{
-    --global-textColor: var(--color-neutral-100) ;
-    
-    --global-textColor-muted: var(--color-neutral-300) ;
-    
-    --global-textColor-meta: var(--color-neutral-500) ;
-    
-    --global-backgroundColor: var(--color-neutral-900) ;
-    
-    --global-foregroundColor: var(--color-neutral-800) ;
-}}
+  :root {
+    --global-textColor: var(--color-neutral-100);
+
+    --global-textColor-muted: var(--color-neutral-300);
+
+    --global-textColor-meta: var(--color-neutral-500);
+
+    --global-backgroundColor: var(--color-neutral-900);
+
+    --global-foregroundColor: var(--color-neutral-800);
+  }
+}
 
 /* reset */
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 img,
 svg {
-    display: block;
-    max-width: 100%;
-    height: auto;
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 /* global page styles */
 
 html {
-    font-family: 'Inter', sans-serif; 
-    line-height: 1.5;
-    color: var(--global-textColor) ;
-    background-color: var(--global-backgroundColor) ; font-size: calc(var(--global-fontSize)/16*1rem) ;
-
+  font-family: "Inter", sans-serif;
+  line-height: 1.5;
+  color: var(--global-textColor);
+  background-color: var(--global-backgroundColor);
+  font-size: calc(var(--global-fontSize) / 16 * 1rem);
 }
 
 /* center everything */
 
 body {
-    display: grid;
-    min-height: 100vh;
-    align-items: center;
+  display: grid;
+  min-height: 100vh;
+  align-items: center;
 }
 
 /* global typography */
 
 h2 {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 
 /* screen reader only object class */
 
 .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 
 /*
@@ -108,123 +107,129 @@ h2 {
 */
 
 .button-reset {
-    border: none;
-    margin: 0;
-    padding: 0;
-    width: auto;
-    overflow: visible;
-    background: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
 
-    /* inherit font & color from ancestor */
-    color: inherit;
-    font: inherit;
+  /* inherit font & color from ancestor */
+  color: inherit;
+  font: inherit;
 
-    /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
-    line-height: normal;
+  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+  line-height: normal;
 
-    /* Corrects font smoothing for webkit */
-    -webkit-font-smoothing: inherit;
-    -moz-osx-font-smoothing: inherit;
+  /* Corrects font smoothing for webkit */
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
 
-    /* Corrects inability to style clickable `input` types in iOS */
-    -webkit-appearance: none;
+  /* Corrects inability to style clickable `input` types in iOS */
+  -webkit-appearance: none;
 }
 
 /* only add margin top if elements are adjacent */
 
-.flow>*+* {
-    margin-top: 1.5rem;
+.flow > * + * {
+  margin-top: 1.5rem;
 }
 
 /* app stuff */
 
-.app{
-    /* center self in grid center */
-    justify-self: center;
-    background-color: var(--global-foregroundColor);
-    padding: 16px;
-    border-radius: 14px;
+.app {
+  /* center self in grid center */
+  justify-self: center;
+  background-color: var(--global-foregroundColor);
+  padding: 16px;
+  border-radius: 14px;
+  max-width: fit-content;
+  & .app__controls {
+    display: flex;
     max-width: 400px;
-    & .app__controls{
-        display: flex;
-        max-width: 100%;
-        flex-wrap: wrap;
-        gap: 16px;
-        flex-direction: row;
-    }
+    flex-wrap: wrap;
+    gap: 16px;
+    flex-direction: row;
+  }
 }
 
-.button-reset{
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    width: 2rem;
-    height: 2rem;
-    display: grid;
-    & > svg{
-        grid-column-start: 1;
-        grid-row-start: 1;
-    }
-}
-
-.app__legend{
-    display: grid;
-}
-
-.legend{
+.button-reset {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  & > svg {
     grid-column-start: 1;
     grid-row-start: 1;
-    list-style-type: none;
-    display: none;
-    opacity: 0;
-    &.active{
-        opacity: 100%;
-        display: block;
-    }
+  }
+}
 
-    & .legend_item{
-        display: grid;
-        grid-template-columns: auto 120px 1fr;
-        gap: 16px;
-        font-feature-settings: 'tnum';
-        & .legend_key::after{
-            content: "";
-            display: inline-block;
-            width: 1rem;
-            height: 1rem;
-            border-radius: 50%;
-            background-color: var(--LegendColor);
-        }
-    }
-    & .legend__value{
-        grid-column-start: 3;
-    }
+.app__legend {
+  display: grid;
+}
+
+.legend {
+  grid-column-start: 1;
+  grid-row-start: 1;
+  list-style-type: none;
+  display: none;
+  opacity: 0;
+  &.active {
+    opacity: 100%;
+    display: block;
+  }
+
+  & .legend_item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+    font-feature-settings: "tnum";
+  }
+  & .legend__value {
+    grid-column-start: 2;
+  }
+}
+
+
+.legend__key{
+    display:flex;
+    align-items: center;
+    gap: 16px;
+}
+.legend__key::after {
+  content: "";
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background-color: var(--legendColor);
 }
 
 /* the paths */
+.app__chart > svg{
+    border: solid hotpink;
+}
 
 /* the legend and controls */
 
+.button-control {
+  width: fit-content;
+  position: relative;
+  /* if input inside is checked */
+  & label {
+    color: var(--global-textColor-muted);
+  }
+  & input:checked + label {
+    color: var(--global-uiColor);
+  }
 
-
-.button-control{
-    width: fit-content;
-    position: relative;
-    /* if input inside is checked */
-    & label{
-        color: var( --global-textColor-muted);
-    }
-    & input:checked + label{
-
-        color: var(--global-uiColor);
-    }
-
-    /* & input{
+  /* & input{
         width: 100%;
         height: 100%;
         
     } */
-
 }
 
 /* theme toggle */
@@ -234,9 +239,9 @@ h2 {
 */
 
 .color-muted {
-    color: var(--global-textColor-muted);
+  color: var(--global-textColor-muted);
 }
 
 .color-meta {
-    color: var(--global-textColor-meta);
+  color: var(--global-textColor-meta);
 }

@@ -77,63 +77,90 @@ const fetchLocalJSON = async () => {
   }
 };
 
-const renderStaticHtml = (data) => {
-  // render the radiobtns
-  renderRdBtns(data);
-  //   render the legends
-  renderLegends(data);
-};
-
 const renderRdBtns = (data) => {
+  let firstTime = true;
   for (let party in data) {
     // render a radio button and a label for each party
-    $controlsEl.innerHTML += '<div class="button-control"><input type="radio" name="party" id="' + party + '" value="' + party + '" class="sr-only js-rdbtn"><label for="' + party + '">' + party + "</label></div>";
+    if (firstTime) {
+      $controlsEl.innerHTML += '<div class="button-control"><input type="radio" name="party" id="' + party + '" value="' + party + '" class="sr-only js-rdbtn" checked><label for="' + party + '">' + party + "</label></div>";
+      firstTime = false;
+    } else {
+      $controlsEl.innerHTML += '<div class="button-control"><input type="radio" name="party" id="' + party + '" value="' + party + '" class="sr-only js-rdbtn"><label for="' + party + '">' + party + "</label></div>";
+    }
   }
 };
 
 const renderLegends = (data) => {
   let html = "";
-  for (let party in data) {
-    html += '<ul class="legend" data-party="' + party + '">';
-    let counter = 1;
-    for (let ageGroup in data[party].ages) {
-      html += '<li style="--legendColor: var(--color-' + counter + ')" class="legend_item"><span class="legend__key">' + ageGroup + '</span><span class="legend__value">' + data[party].ages[ageGroup] + "</span></li>";
-      counter++;
-    }
-    html += "</ul>";
+  let firstTime = true;
+  let counter = 1;
+
+  console.log(data);
+  html += '<ul class="legend active" data-party="' + data.party + '">';
+
+  for (let ageGroup in data.ages) {
+    html += '<li style="--legendColor: var(--color-' + counter + ')" class="legend_item"><span class="legend__key">' + ageGroup + '</span><span class="legend__value">' + data.ages[ageGroup] + "</span></li>";
+
+    counter++;
   }
+
+  html += "</ul>";
+
   $legendEl.innerHTML = html;
 };
 
-const addEventListeners = () => {
-  rdbtnsEventlistener();
+const renderChart = (data) => {
+  let html = "";
+  console.log(data);
+  let counter = 1;
+  const cx = 200,
+    cy = 100,
+    rx = 75,
+    ry = 75;
+
+  for (let ageGroup in data.ages) {
+    const percentage = parseFloat(data.ages[ageGroup]);
+    console.log(data.ages[ageGroup])
+    const Δ = (percentage * 180) / 100; // convert percentage to degrees
+    const d = drawArc([cx, cy], [rx, ry], [180, Δ], 180);
+
+    html += `<path d="${d}" class="chart__path" stroke-width="50" id="path-${counter}" style="--chartColor: var(--color-${counter})"></path>`;
+    counter++;
+  }
+
+  document.querySelector(".chart").innerHTML = html;
 };
 
-const rdbtnsEventlistener = () => {
+const rdbtnsEventlistener = (data) => {
   const allRdBtns = document.querySelectorAll(".js-rdbtn");
 
   allRdBtns.forEach((rdbtn) => {
     rdbtn.addEventListener("change", (e) => {
       const selectedParty = e.target.value;
-      togglePartyUl(selectedParty);
+      // togglePartyUl(selectedParty);
+      generateCorresponding(data, selectedParty);
     });
   });
 };
 
-const togglePartyUl = (selectedParty) => {
-
-  const activeUl = document.querySelector(`.legend.active`);
-  if (activeUl) {
-    activeUl.classList.remove("active");
-  }
-  const rightUl = document.querySelector(`.legend[data-party="${selectedParty}"]`);
-
-  rightUl.classList.add("active");
+const generateCorresponding = (data, selectedParty) => {
+  // select out of data corresponding selected party
+  const selectedPartyData = data[selectedParty];
+  renderLegends(selectedPartyData);
+  renderChart(selectedPartyData);
 };
+
 const init = async () => {
   const data = await fetchLocalJSON();
-  renderStaticHtml(data);
-  addEventListeners();
+
+  renderRdBtns(data);
+
+  // eerste render doen
+  const selectedParty = document.querySelector(".js-rdbtn:checked").value;
+
+  generateCorresponding(data, selectedParty);
+
+  rdbtnsEventlistener(data);
 };
 
 init();
